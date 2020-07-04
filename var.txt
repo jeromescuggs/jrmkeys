@@ -1,0 +1,4 @@
+foobar1234
+foo{!}bar1
+{!}foobar
+1234321
