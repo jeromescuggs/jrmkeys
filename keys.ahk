@@ -6,20 +6,8 @@
 ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  
 ; Enable warnings to assist with detecting common errors.
-; SendMode Input  
-; Recommended for new scripts due to its superior speed and reliability.
 
-; SetWorkingDir %A_ScriptDir%  
-; Ensures a consistent starting directory.
-
-; WIP workaround to gain focus of newly-created WSL session
-; change if you have issues with getting window focus
-;#WinActivateForce
-;SetWinDelay, 150
 SetKeyDelay, 0, 35
-
-; adding this to sent output this should make pressing a hotkey run smoothly
-; {vkE8}
 
 
 ;   variable          description
@@ -39,46 +27,20 @@ Loop
         FileReadLine, pass%A_Index%, C:/Users/%A_UserName%/var.txt, %A_Index%
     }
 
-; fileread, contents,  C:/Users/%A_UserName%/var.txt	;reads the notepad
-; loop, parse, contents, `n	;read notepad line by line
-; {
-; 		pass%a_index% = %a_loopfield%	;assign var
-; }
-
-; swagfag method
-;##################################################################
-; MsgBox % readLineNum(3, FileOpen("C:\mylongasstxtfile.txt", "r"))
-;
-; readLineNum(lineNum, fileObj) {
-;	Loop % lineNum
-;	{
-;		line := ""
-;		readLine := fileObj.ReadLine()
-;
-;		Loop 
-;		{
-;			line .= readLine
-;###################################################################
-
 ; ========================================================================
 
 ^#F5::
-; Send, {Blind}
-; Send, {vkE8}
 Send, {Raw}%pass1%
 Send, {Enter}
 return
 
 ^#F6::
 Send, {Raw}%pass2%
-;Send, {Blind}
-;Send, {vkE8}
 Send, {Enter}
 return
 
 ^#F7::
 Send, {Raw}%pass3%
-;Sleep, 150
 Send, {Enter}
 return
 
@@ -90,12 +52,20 @@ return
 ; ========================================================================
 
 ; ^#F9::
-; FileRead, jrmvar, C:\Users\%A_UserName%\var.txt 
-; Send, %jrmvar%
+; Send, {Raw}%pass5%
 ; Send, {Enter}
 ; return
 
 ; ========================================================================
+
+; ====================
+; Application shortcuts
+; The Run command captures the process's id and stores it as a variable, 
+; and then WinWait and WinActivate are used to make sure that the launched window
+; grabs window focus. Otherwise you might start typing only to find you're typing
+; in another window, which can be an issue
+
+; Win+Ins runs a shortcut to launch a WSL terminal
 
 #Ins::
 sleep, 150
@@ -105,12 +75,16 @@ WinWait, ahk_pid %process_id%
 WinActivate, ahk_pid %process_id%
 return
 
+; Ctrl+Win+Ins runs a WSL2 terminal
+
 ^#Ins::
 sleep,150
 Run, C:\Users\%A_UserName%\Desktop\WSL2.lnk,,, process_id3
 WinWait, ahk_pid %process_id3%
 WinActivate, ahk_pid %process_id3%
 return
+
+; Win+Del runs a 3rd WSL terminal
 
 #Del::
 sleep, 150
@@ -121,18 +95,28 @@ return
 
 ; ========================================================================
 
+; Win+O(pacity) will set the transparency of the focused window to a figure between 0-255
+
 #o::  ; Press Win+O to turn on transparency for the window under the mouse.
 WinSet, Transparent, 210, A
 return
+
+; Ctrl+Win+O turns off transprency 
 
 ^#o::  ; Press Win+O to turn off transparency for the window under the mouse.
 WinSet, Transparent, Off, A
 return
 
-;-Caption
+; Win+C(aption) removes the title bar at the top of a window. 
+; This isn't very useful in windows 10, and still leaves a thin strip of visible GUI 
+; on top. However, if you have a modified/custom theme, you might find using this command
+; does work and leaves a title-less window.
+
+; If running this script in Windows 7, use the second hexcode 0xc40000. 
+
 #c::
-WinSet, Style, -0x800000, A
-;WinSet, Style, -0xc40000, A 
+WinSet, Style, -0x800000, A   ; windows 10 gui
+;WinSet, Style, -0xc40000, A  ; windows 7 gui
 return
 ;
 
@@ -141,5 +125,3 @@ return
 WinSet, Style, +0xC00000, A
 return
 ;
-
-
