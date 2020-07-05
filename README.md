@@ -7,7 +7,7 @@ global hotkeys for some useful actions, using autohotkeys and compatible with Wi
 
 [autohotkey] is a great program allowing incredibly powerful customization in a relatively simple and easy scripting language. 
 
-[Chocolatey] is a package manager for Windows which allows painless, silent installs of a majority of common and popular software. installing multiple programs is as easy as e.g. `choco install -y firefox steam winamp vcredist-all` installs several popular programs, as well as the entire collection of visual code redistributable libraries requires by a variety of programs. 
+[Chocolatey] is a package manager for Windows which allows painless, silent installs of a majority of common and popular software. installing multiple programs is easy, e.g. `choco install -y firefox steam winamp vcredist-all` installs several popular programs, as well as the entire collection of visual code redistributable libraries. 
 
 ### hotkey program
 
