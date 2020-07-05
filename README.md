@@ -1,8 +1,15 @@
 # jrmkeys
-global hotkeys for some useful actions, using autohotkeys and compatible with Windows 10
+global hotkeys for some useful actions, using autohotkeys and compatible with Windows 10. includes some other tools to help install [chocolatey] package manager and [autohotkeys]. 
 
 ## overview
+
+### tools 
+
 [autohotkey] is a great program allowing incredibly powerful customization in a relatively simple and easy scripting language. 
+
+[Chocolatey] is a package manager for Windows which allows painless, silent installs of a majority of common and popular software. installing multiple programs is as easy as e.g. `choco install -y firefox steam winamp vcredist-all` installs several popular programs, as well as the entire collection of visual code redistributable libraries requires by a variety of programs. 
+
+### hotkey program
 
 as the web and security in general advance, it can get somewhat annoying to type and retype passwords in, especially as applications increasingly set expirations on logins, but also require increasingly complex passwords. 
 
@@ -14,15 +21,8 @@ this script, when run, will sit in the taskbar and do three things:
 ## password / string loader
 
 ## WARNING!
+
 first, a general warning: **this will require storing passwords in a plaintext file on your computer.** do not **ever** use this for any password that allows direct access to banking accounts, your main email, et cetera. 
-
-~~### ANOTHER WARNING!~~
-
-~~right now, the script parses the text file and reads it directly through autohotkey, which means **it will treat some characters as autohotkey scripting**. `!` and `^` in particular are treated as the `Alt` and `Ctrl` keys, respectively. This means if you store the string `foo!bar`, the script would type `foo` but then it would send `Alt`+`b`, which at a minimum is not what you wanted, but could also possibly activate a hotkey on any program you might have focused in the foreground.~~
-
-~~if you store a string of text such as `foo!` or `bar^`, right now you must manually escape out of them with `{}` curly brackets.~~ 
-
-The script now interprets the `var.txt` file literally, so whatever you add on each line is exactly what is sent.
 
 ### description
 
@@ -56,8 +56,14 @@ To make sure focus is kept, when the application is run the process id is stored
 
 Sometimes, using the `sleep` command to pause the script briefly (here, 150ms) will also help. After the `Run` command, autohotkey fires off a sort of 'rapid pulse' of attempts to capture window focus. Alot of quirks with autohotkey can be worked around by forcing scripts to pause for a bit, as the operating system sometimes 'misses' inputs while processing other actions. 
 
+**@TODO**
+- GUI frontend to select hotkey shortcut targets while script is running
+
 ## GUI hacks 
 
 ### enable and disable focused window transparency
 
 ### enable and disable focused window's title bar
+
+[autohotkey]:https://autohotkey.com
+[chocolatey]:https://chocolatey.org
