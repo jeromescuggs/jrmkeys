@@ -65,5 +65,8 @@ Sometimes, using the `sleep` command to pause the script briefly (here, 150ms) w
 
 ### enable and disable focused window's title bar
 
+## @TODO
+-implementation of a basic-level obfuscation for stored plaintext files
+
 [autohotkey]:https://autohotkey.com
 [chocolatey]:https://chocolatey.org
